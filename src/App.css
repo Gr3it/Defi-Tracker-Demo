@@ -183,7 +183,8 @@
 }
 
 .wallet-input-text {
-  font-size: 1.5rem;
+  text-align: center;
+  font-size: 1.125rem;
   font-weight: 400;
 }
 
@@ -209,4 +210,22 @@
 
 .wallet-input-loading {
   font-size: 1.5rem;
+}
+
+@media screen and (max-width: 900px) {
+  :root {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  :root {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  :root {
+    font-size: 8px;
+  }
 }

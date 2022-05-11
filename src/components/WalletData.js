@@ -114,7 +114,11 @@ function WalletData({ coins, idSelected = [], wallet, setWallet, baseUrl }) {
   return (
     <div>
       <div className="wallet-data-container">
-        <div className="wallet-input-text">Current Address: {wallet}</div>
+        <div className="wallet-input-text">
+          Current Address
+          <br />
+          {wallet}
+        </div>
         <input
           placeholder="Paste address here"
           id="wallet-input-box"
