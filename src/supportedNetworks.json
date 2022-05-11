@@ -1,30 +1,37 @@
 [
   {
     "name": "Ethereum",
-    "rpc": "https://eth.public-rpc.com"
+    "rpc": "https://eth.public-rpc.com",
+    "coin": "ETH"
   },
   {
     "name": "BNB Smart Chain (BEP20)",
-    "rpc": "https://bscrpc.com"
+    "rpc": "https://bscrpc.com",
+    "coin": "BNB"
   },
   {
     "name": "Polygon",
-    "rpc": "https://polygon-rpc.com"
+    "rpc": "https://polygon-rpc.com",
+    "coin": "MATIC"
   },
   {
     "name": "Avalanche C-Chain",
-    "rpc": "https://avalanche.public-rpc.com"
+    "rpc": "https://avalanche.public-rpc.com",
+    "coin": "AVAX"
   },
   {
     "name": "Fantom",
-    "rpc": "https://rpc.ftm.tools/"
+    "rpc": "https://rpc.ftm.tools/",
+    "coin": "FTM"
   },
   {
     "name": "Arbitrum",
-    "rpc": "https://arbitrum.public-rpc.com"
+    "rpc": "https://arbitrum.public-rpc.com",
+    "coin": null
   },
   {
     "name": "Moonriver",
-    "rpc": "https://rpc.moonriver.moonbeam.network"
+    "rpc": "https://rpc.moonriver.moonbeam.network",
+    "coin": "MOVR"
   }
 ]

@@ -124,3 +124,50 @@
 .selected {
   background-color: #6ae6b2;
 }
+
+.wallet-data-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  width: 70vw;
+  max-width: 1200px;
+  padding-bottom: 2rem;
+}
+
+.wallet-network-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 12px;
+  border-radius: 2rem;
+}
+
+.wallet-network-header {
+  padding: 1rem 2rem;
+  height: 4rem;
+  border-radius: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  background-color: #6ae6b2;
+}
+
+.wallet-network-network {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.wallet-network-coin-balance {
+  font-size: 1.25rem;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+}
+
+.wallet-network-coin-balance-symbol {
+  padding-left: 0.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
