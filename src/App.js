@@ -5,6 +5,7 @@ import CoinList from "./components/CoinList";
 import WalletData from "./components/WalletData";
 
 const axios = require("axios");
+const baseUrl = "https://nodejs-coinmarketcap-backend.herokuapp.com";
 
 function App() {
   const [coins, setCoins] = useState("");
@@ -13,7 +14,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/listings/latest")
+      .get(`${baseUrl}/listings/latest`)
       .then((response) => {
         setCoins(response.data.data);
         console.log(response.data.data);
@@ -36,6 +37,7 @@ function App() {
                 idSelected={idSelected}
                 wallet={wallet}
                 setWallet={(value) => setWallet(value)}
+                baseUrl={baseUrl}
               />
             }
           />

@@ -10,7 +10,7 @@ const ERC20Abi = [
   "function balanceOf(address account) external view returns (uint256)",
 ];
 
-function WalletData({ coins, idSelected = [], wallet, setWallet }) {
+function WalletData({ coins, idSelected = [], wallet, setWallet, baseUrl }) {
   const [data, setData] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
@@ -68,7 +68,7 @@ function WalletData({ coins, idSelected = [], wallet, setWallet }) {
     await Promise.all(
       idSelected.map(async (id, index) => {
         let element = coins.find((x) => x.id == id);
-        let response = await axios.get(`http://localhost:5000/info/${id}`);
+        let response = await axios.get(`${baseUrl}/info/${id}`);
         await Promise.all(
           response.data.data[id].contract_address.map(async (contract) => {
             const network = networks.find(
