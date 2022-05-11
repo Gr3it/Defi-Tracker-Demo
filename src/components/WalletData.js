@@ -10,11 +10,9 @@ const ERC20Abi = [
   "function balanceOf(address account) external view returns (uint256)",
 ];
 
-function WalletData({ coins, idSelected = [] }) {
+function WalletData({ coins, idSelected = [], wallet, setWallet }) {
   const [data, setData] = useState([]);
-  const [wallet, setWallet] = useState(
-    "0xb5d85cbf7cb3ee0d56b3bb207d5fc4b82f43f511"
-  );
+  const [loaded, setLoaded] = useState(false);
 
   const updateNetworkBalance = async () => {
     let balanceData = [];
@@ -27,6 +25,7 @@ function WalletData({ coins, idSelected = [] }) {
           balance: balance,
           index: index,
           coin: coin,
+          coins: [],
         },
       ];
     }
@@ -44,14 +43,30 @@ function WalletData({ coins, idSelected = [] }) {
     balanceData.sort((a, b) => {
       return a.index - b.index;
     });
-    setData(balanceData);
+    return balanceData;
   };
 
-  const fetchContractsBalances = async (idSelected) => {
+  const fetchContractsBalances = async (idSelected, data) => {
     let coinsBalances = data;
 
+    function setCoinsBalances(name, amount, index, network) {
+      coinsBalances = coinsBalances.map((element) => {
+        return element.name == network
+          ? {
+              ...element,
+              coins: [
+                ...element.coins,
+                { token: name, balance: amount, index: index },
+              ].sort((a, b) => {
+                return a.index - b.index;
+              }),
+            }
+          : element;
+      });
+    }
+
     await Promise.all(
-      idSelected.map(async (id) => {
+      idSelected.map(async (id, index) => {
         let element = coins.find((x) => x.id == id);
         let response = await axios.get(`http://localhost:5000/info/${id}`);
         await Promise.all(
@@ -71,26 +86,57 @@ function WalletData({ coins, idSelected = [] }) {
               const balance =
                 (await tokenContract.balanceOf(wallet)) /
                 10 ** (await tokenContract.decimals());
-              console.log(network.name + " " + balance);
+              setCoinsBalances(
+                response.data.data[id].symbol,
+                balance,
+                index,
+                contract.platform.name
+              );
             }
           })
         );
       })
     );
+    setLoaded(true);
+    setData(coinsBalances);
   };
 
   const updateData = async () => {
-    await updateNetworkBalance();
-    await fetchContractsBalances(idSelected);
+    const data = await updateNetworkBalance();
+    await fetchContractsBalances(idSelected, data);
   };
 
   useEffect(() => {
+    if (wallet == "") return;
     updateData();
-  }, []);
+  }, [wallet]);
 
   return (
     <div>
       <div className="wallet-data-container">
+        <div className="wallet-input-text">Current Address: {wallet}</div>
+        <input
+          placeholder="Paste address here"
+          id="wallet-input-box"
+          className="wallet-input-box"
+          type="text"
+        ></input>
+        <div
+          className="wallet-input-confirm"
+          onClick={() => {
+            const element = document.getElementById("wallet-input-box");
+            setWallet(element.value);
+            element.value = "";
+          }}
+        >
+          Confirm Address
+        </div>
+        {!loaded &&
+          (wallet == "" ? (
+            <div className="wallet-input-loading">Insert A Wallet</div>
+          ) : (
+            <div className="wallet-input-loading">Loading Data ...</div>
+          ))}
         {data.map((element) => {
           return (
             <WalletNetwork
@@ -98,6 +144,7 @@ function WalletData({ coins, idSelected = [] }) {
               name={element.name}
               balance={element.balance}
               coin={element.coin}
+              coins={element.coins}
             />
           );
         })}

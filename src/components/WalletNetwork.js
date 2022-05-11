@@ -1,6 +1,8 @@
+import CoinsEntry from "./CoinsEntry";
+
 function WalletNetwork({ name, balance, coin, coins = [] }) {
   return (
-    <div className={"wallet-network-container"}>
+    <div className="wallet-network-container">
       <div className="wallet-network-header">
         <div className="wallet-network-network">{name}</div>
         {coin && (
@@ -10,7 +12,9 @@ function WalletNetwork({ name, balance, coin, coins = [] }) {
           </div>
         )}
       </div>
-      cipolla
+      {coins.map((element) => {
+        return <CoinsEntry name={element.token} balance={element.balance} />;
+      })}
     </div>
   );
 }

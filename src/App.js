@@ -9,6 +9,7 @@ const axios = require("axios");
 function App() {
   const [coins, setCoins] = useState("");
   const [idSelected, setIdSelected] = useState([]);
+  const [wallet, setWallet] = useState("");
 
   useEffect(() => {
     axios
@@ -29,7 +30,14 @@ function App() {
           <Route
             path="/"
             exact
-            element={<WalletData coins={coins} idSelected={idSelected} />}
+            element={
+              <WalletData
+                coins={coins}
+                idSelected={idSelected}
+                wallet={wallet}
+                setWallet={(value) => setWallet(value)}
+              />
+            }
           />
           <Route
             path="/coinlist"

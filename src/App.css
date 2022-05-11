@@ -141,6 +141,8 @@
   width: 100%;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 12px;
   border-radius: 2rem;
+  gap: 2rem;
+  padding-bottom: 2rem;
 }
 
 .wallet-network-header {
@@ -170,4 +172,41 @@
   padding-left: 0.5rem;
   font-size: 1rem;
   font-weight: 400;
+}
+
+.coins-entry-container {
+  width: 100%;
+  padding: 0rem 2rem;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.wallet-input-text {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.wallet-input-box {
+  text-align: center;
+  width: 30rem;
+  height: 2.5rem;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1.25rem;
+}
+
+.wallet-input-confirm {
+  background-color: #6ae6b2;
+  padding: 1rem 2rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.wallet-input-loading {
+  font-size: 1.5rem;
 }
